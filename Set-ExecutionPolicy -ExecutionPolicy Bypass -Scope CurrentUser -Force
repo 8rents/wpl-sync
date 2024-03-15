@@ -1,0 +1,3 @@
+Make sure to set script execution to byspass in if running standard powershell client
+
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force

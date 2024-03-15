@@ -1,0 +1,62 @@
+
+name: WPL Device Sync
+
+# Version of this Sync Script
+version: 1.1.0
+
+# Is this config part of a "secure heirarchry"?
+secure: no
+
+# Device Settings
+device: 
+
+  # Device Name
+  name: WPL
+
+  # Device description
+  description: Windows Public Limited Sync
+
+  # Is this a shared or public computer?
+  public: yes
+
+  # Sets the image to be used as the desktop wallpaper
+  wallpaper: 
+    
+    # URL of the image (if it's hosted online)
+    url: https://raw.githubusercontent.com/8rents/_/3f7358b2393f5865f4e18a1653b85c3cbad0ed33/Wallpapers/san-francisco/dark-monotones/cyan-sid-verma-k-LCaf7TOD8-unsplash.jpg
+    
+    # How would you like this image to sit on the desktop (stretch, fill, center, fit)
+    position: fill
+    
+    # Automatically edit the image before setting it?
+    edit: yes
+      
+      # Chose the image editor (currently only photopea is an option)
+      editor: photopea
+
+      # Should the image be monotone?
+      colorize: yes
+    
+      # What color should the monotone be? 
+      color: cyan
+    
+      # how saturated should the colors be? in percent?
+      saturation: 75
+
+      # how bright should the brightness be (in percent)
+      brightness: 60
+
+# OS information
+os: 
+  
+  # OS Name (Windows, Mac, Debian etc)
+  name: Windows
+
+  # OS Version
+  version: 10
+
+# User Information
+user:
+
+  # GitHub Username
+  github: 8rents
