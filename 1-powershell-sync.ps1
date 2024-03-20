@@ -429,28 +429,37 @@ echo @"
 git clone https://github.com/8rents/vscode $HOME\scoop\apps\vscode\current\data
 
 
+# --------------------------
+# Bash Configuration
+# Installs to 
+# --------------------------
+
 echo @" 
 
 # Cloning Bash Config
 
+**Warning** - This script has to be run from the bash shell. Symlinks from PowerShell will not work.
+
+## Configuration Details
+
 - **Source:** [8rents/bash](https://github.com/8rents/bash)
-- **Install Location:** ~\
-
-**Note:* Bash configs are by default created in `$HOME` aka /home/sfplinternet/*
-
-- './.bashrc' -> '$HOME/.bashrc'
-- './.bash_logout' -> '$HOME/.bash_logout'
-- './.bash_profile' -> '$HOME/.bash_profile'
-- './.profile' -> '$HOME/.profile'
+- **Install Location:** /c/Users/sfplinternet/Settings/Shells/Bash
+- **Symlink files to:** /c/Users/sfplinternet/
 
 "@ | glow -
 
 git clone https://github.com/8rents/bash $HOME\Settings\Shells\Bash
 
+cd $HOME\Settings\Shells\Bash
 
-# fetch windows branch
+
+# fetch all branches in the origin repo (aka GitHub)
+git fetch origin
 
 # switch to windows branch
+git checkout -b windows origin/windows
+
+
 
 # symlink all the files!!
 
@@ -488,6 +497,8 @@ echo @"
 - `psfzf` (PowerShell wrapper around FZF)
 - `autojump` - CLI tool that remembers the directories you've been to the most.
 - `nodejs` - Server side javascript development (installs npm [package manager])
+- `yarn` - A slightly better package manager than npm
+- `pnpm` - An even better package manager than `yarn`. PNPM downloads each dependency only one time making `node_modules` folders a helluva lot smaller.
 - `python` - Python programming language (installs pip package manager)
 - `neofetch` - neat little terminal util to displa system info
 
