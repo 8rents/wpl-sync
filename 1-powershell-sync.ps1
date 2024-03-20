@@ -507,7 +507,7 @@ echo @"
 "@ | glow -
 
 scoop bucket add extras
-scoop install typora vcredist2022 starship windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs python
+scoop install typora vcredist2022 starship windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs yarn pnpm python neofetch
 
 echo @"
 

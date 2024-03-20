@@ -43,7 +43,19 @@ The main PowerShell script is set to perform a numnber of preliminary checks suc
 
 ### Does the user have admin?
 
-if so abort and suggest using Windows Linux Subsystem instead of this script
+if so abort and suggest using Windows Linux Subsystem instead of this script.
+
+
+
+### IDK but this is brual
+
+Docker doesn't work w/o admin.... WTF
+
+
+
+### But there's Portable-VirtualBox!!!
+
+---
 
 ### Is there a relevent USB Plugged in?
 
