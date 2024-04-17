@@ -1,8 +1,11 @@
-# Name of Sync Script
+# Name of  Script
 name: WPL Device Sync
 
 # Version of this Sync Script
 version: 1.1.0
+
+# Date that this script was last modifed
+modified: Monday, March 18, 2024 @ 11:16:43 AM
 
 # Is this config part of a "secure heirarchry"?
 secure: no
@@ -14,7 +17,7 @@ device:
   name: WPL
 
   # Device description
-  description: Windows Public Limited Sync
+  description: Windows Public Limited
 
   # Is this a shared or public computer?
   public: yes
