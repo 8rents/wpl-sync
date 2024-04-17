@@ -17,87 +17,70 @@ $modified = "Monday, March 18, 2024 @ 11:16:43 AM"
 
 # Table of Contents / What does this script do?
 
-# Line: 385 - Part 1: Preliminary Installs 
-# Line: 037 - Part 2: Control Checks
-# Line: 015 - Part 3: Set up & Configuration 
-# Line: 415 - Part 4: Windows Explorer Settings
-# Line: 665 - Part 5: Cloning custom configs from GitHub
+# Line: 029 - Part 1: Control Checks
+# Line: 128 - Part 2: Set up & Configuration
+# Line: 156 - Part 3: Display the Welcome Message
+# Line: 178 - Part 4: Windows Explorer Settings
+# Line: 257 - Part 5: Cloning custom configs from GitHub
 # Line: 666 - Part 6: Scoop Installs
 # Line: 667 - Part 7: Finishing up
 
-
 ########################################################
-######## Part 1: Preliminary Installs  #################
+########## Part 1: Control Checks ######################
 ########################################################
 
+###############################################
+# Check #1: See if scoop is already installed
+###############################################
 
-###########################
-# Is Scoop Installed ??????
-###########################
-
-##############
-# What's happening here?
-#############
-
-# If $HOME\scoop is not found then:
-####### 1. Show a message
-####### 2. Download Scoop
-####### 3. Install git glow powershell-yaml via scoop
-# else 
-####### 1. Run  Scoop some updates
-####### 2. Exit 
-
+# if the ~\scoop directory is not found we can assume scoop is not installed
 if (-not(Test-Path -Path "$HOME\scoop")) {
+
+# If scoop is not installed then Print a message explaining what we're installing
 
 echo @"
 
 Preliminary Installs (via scoop):
 
-- Scoop (PowerShell & Windows Package Manager)
-- git (used for installing and managing application packages, both for Windows & PowerShell
-- powershell-yaml (for reading our yml config file)
-- glow (used for supplying terminal feedback in Markdown)
+- `scoop` (PowerShell & Windows Package Manager)
+- `git` (used for installing and managing application packages, both for Windows & PowerShell
+- `powershell-yaml` (for reading our yml config file)
+- `glow` (used for supplying terminal feedback in Markdown)
 
 "@
 
+# Otherwise, Install Scoop
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+# And then install the prerequiste apps
 scoop install git glow powershell-yaml
 
+# However if scoop is already installed 
+# (if the ~\scoop directory is found then run updates and skip the rest)
 } else {
 
-# If the $HOME\scoop folder is found, 
-#### then run updates and skip the rest
-   
+echo @"
+
+# Scoop & friends already installed, running update
+
+"@ | glow -
+
+# 1. First update scoop itself
 scoop update
+
+# 2. Update all apps installed with scoop
 scoop update *
+
+# 3. Print the status after all the updates have been applied
 scoop status
 
 }
 
-#________________________________________________________
+#############################################
+# Check 2: Does the User have admin ??????
+#############################################
 
-
-########################################################
-########## Part 2: Control Checks ######################
-########################################################
-
-
-###########################
-# Does the User have admin ??????
-###########################
-
-##############
-# What's happening here?
-#############
-
-# Use the test-admin function
-####### if the user is admin
-############## print message
-############## and exit
-####### otherwise proceed as normal
-
-
-# Test for admin function
+# Test for admin function: A self contained function to test the current user to see if they have admin
 function Test-Administrator  
 {  
     [OutputType([bool])]
@@ -108,16 +91,14 @@ function Test-Administrator
     }
 }
 
-# If the user is not admin then display the message
-if(Test-Administrator)
+# If the user is admin then display the message
+# Otherwise if the user is not admin don't display anything and cruise right by
+if(Test-Administrator) 
 {
+# Admin is True
 
 echo @"
-
 ________________________________________________________
-"@ 
-
-echo @"
     
 So you're running this as admin... This script is mainly for peons who are running limited accounts on public boxes.
 
@@ -136,108 +117,49 @@ Now you're all set... That's much better than this kludge of a mess...
 
 Anyway, Have a nice day :)
 
-"@
-
-echo @"
 ________________________________________________________
-
 
 "@ 
 
-} else {
-    # no admin
 }
 
+###################################
+# Check 3: Is the user using a USB?
+###################################
 
-
-########################################################
-###### Part 3: Set up & Configuration ###############
-########################################################
-# What goes on here? Read the yaml file in and then output it back to a different yaml file 
-
-
-###########################
-# Import and begin working with the YAML?
-###########################
-
-##############
-# What's happening here?
-#############
-
-# the config.yml gets imported
-
-
-
+# Need to implement this
 
 ########################################################
-####### Part 2 Set Up & Configuration ##################
+###### Part 2: Set up & Configuration ##################
 ########################################################
+# Working with a yaml file
 
-# read the yaml file as a siple string
-# Load the RAW config file into the local $config var
-$config = (Get-Content -Raw Sync\config.yml | Out-String)
-
-# Store the values as YAML (Not plain text) in the environmental varible
-$env:config = $config | ConvertTo-Yaml
-
-# new convert the enviormental variable to a has table and reassign to the local variable
-$config = $env:config | ConvertFrom-Yaml
 
 
 # Update some of the values in the hash table
-$config.modfied = $modifed
+$config.modified = $modified
 $config.version = $version
 
-# now that some values have been updated re-convert the hash table to 
-# YAML and reassign the local variable to the environemental variable
-$env:config = $config | ConvertTo-Yaml
-
-# write the updated environemental var to the config file
-Out-File -FilePath .\new-config.yml -InputObject $env:config -Encoding UTF8
-
-
-
 
 ########################################################
-###### Part 4: Windows Explorer Settings ###############
+###### Part 3: Display THE Welcome Message #############
 ########################################################
-
-
-
-# Instructions
-
-# the environmental variable should always be yaml
-# the local variable can be whatever format is needed
-# the file config.yml is only written from the enviornmental
-
-
-
-# 2.  All you need to do work directly with the local $config variable. Then at the end of the script, convert the string back to yaml and  reassign it to the env variable
-
-
-
-# Load Configuration File here
 
 echo @"
 
 ---------------------------------------------------------
 
-Welcome to:
+WPL Sync Script
 
-Windows Public Limited Sync Script
-
-You are currently running version: $version
+Version: $config.version last updated on $config.modified
 
 --------------------------------------------------------
 
 "@
 
-
-
-
-
-
-
+########################################################
+###### Part 4: Windows Explorer Settings ###############
+########################################################
 echo @"
 
 # Updating Windows Explorer Settings
@@ -284,6 +206,7 @@ echo @"
 # Advanced Explorer Preferences
 
 $path
+
 "@
 
 
@@ -314,12 +237,9 @@ $path
 
 
 
-
 ########################################################
 ##### Part 5: Cloning custom configs from GitHub #######
 ########################################################
-
-
 
 echo @"
 
@@ -453,7 +373,7 @@ git clone https://github.com/8rents/bash $HOME\Settings\Shells\Bash
 cd $HOME\Settings\Shells\Bash
 
 
-# fetch all branches in the origin repo (aka GitHub)
+# fetch all branches in the origin repo (GitHub)
 git fetch origin
 
 # switch to windows branch
@@ -461,20 +381,20 @@ git checkout -b windows origin/windows
 
 
 
-# symlink all the files!!
+# Symlink Bash DotFiles to $Home Directory
 
-# link bash rc file
-# rc.bash .bashrc
+# link bash rc file - rc.bash .bashrc
+ln -s C:\Users\sfplinternet\Settings\Shells\Bash\rc.bash $HOME\.bashrc
 
-# link bash lougout
-# logout.bash .bash_logout
+# link bash lougout - logout.bash .bash_logout
+ln -s C:\Users\sfplinternet\Settings\Shells\Bash\logout.bash $HOME\.bash_logout
 
-# LINK BASH POFILE
-# profile.bash .bash_profile
+# LINK BASH POFILE - profile.bash .bash_profile
+ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.bash $HOME\.bash_profile
 
 
-# link general profile
-# profile.sh .profile
+# link general profile - profile.sh .profile
+ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.sh $HOME\.profile
 
 
 echo @"
@@ -483,11 +403,11 @@ echo @"
 
 # Installing Windows & Powershell apps via `scoop`:
 
-- `typora` - Beautiful markdown editor)
+- `typora` - Beautiful markdown editor
 - `vcredist2022` - A bucket or library recommended by starship amonst others
 - `starship` - Newer command prompt (need to get nerd fonts properly automated)
-- `windows-terminal` - A decent termianl emulator)
-- `msys2` - Linux kludge with bash and pacman)
+- `windows-terminal` - A decent termianl emulator
+- `msys2` - Linux kludge with bash and pacman
 - `github` - GitHub Desktop, GUI Based git versioning
 - `lazygit` - alternative cli for git
 - `vscode` - Modern IDE (that isn't working half the time)
@@ -500,14 +420,14 @@ echo @"
 - `yarn` - A slightly better package manager than npm
 - `pnpm` - An even better package manager than `yarn`. PNPM downloads each dependency only one time making `node_modules` folders a helluva lot smaller.
 - `python` - Python programming language (installs pip package manager)
-- `neofetch` - neat little terminal util to displa system info
-
+- `neofetch` - neat little terminal util to display system info
+- `electrum` - The best bitcoin wallet
 ---
 
 "@ | glow -
 
 scoop bucket add extras
-scoop install typora vcredist2022 starship windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs yarn pnpm python neofetch
+scoop install typora vcredist2022 starship windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs yarn pnpm python neofetch electrum
 
 echo @"
 
@@ -549,7 +469,7 @@ echo @"
 "@ | glow -
 
 ii "$HOME\scoop\apps\github\current\GitHubDesktop.exe"
-ii "$HOME\scoop\apps\vscode\current\Code.exe"
+# ii "$HOME\scoop\apps\vscode\current\Code.exe"
 ii "$HOME\scoop\apps\windows-terminal\current\WindowsTerminal.exe"
 ii "$HOME\scoop\apps\typora\current\Typora.exe"
 
@@ -567,4 +487,4 @@ It's basically read-only.
 
 "@
 
-$env:config = $config | ConvertTo-Yaml
+# $env:config = $config | ConvertTo-Yaml
