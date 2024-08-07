@@ -1,0 +1,35 @@
+_____________________________________
+    
+So you're running this as admin... 
+
+This script is mainly for peons 
+who are running limited accounts 
+on public boxes.
+
+You might as well just install 
+Linux Subsystem, Hyper terminal 
+and get vscode syncing flawlessly.
+        
+Honestly, running Cmder terminal 
+with msys bash and a kludged 
+portable vscode will seem less 
+than elegant compared to the power 
+to actually use what you have.
+
+Here's what I suggest,
+
+Run this:
+    
+wsl --install
+    
+That will install Linux subsystem
+
+Now you're all set... 
+
+That's much better than this 
+kludge of a mess... 
+
+Anyway, Have a nice day :)
+
+__________________________________
+
