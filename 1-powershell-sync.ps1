@@ -1,37 +1,51 @@
+# temp - import these from yml file
+
+$name = "WPL Sync"
+$description = "Synchronization Script for\n Windows Public Limited Computers"
 $version = "0.3.5"
-$modified = "Monday, March 18, 2024 @ 11:16:43 AM"
+$modified = (ls .\test.ps1).LastWriteTime
+$author = "8rents@gmail.com"
 
-# Note: These values will be writen to the config.yml on the next run
+###################################
+# Script welcome message
+###################################
 
-########################################################
-############### Ephemeral Computing for: ###############
-########### Windows Limited & Public Machines ##########
-########### Part 1: A long PowerShell Script ###########
-########################################################
+echo @"
 
-# What to do after running this script?
+____________________________________________
 
-# When this script finishes running, a Windows Terminal Bash Prompt will open up. Then you will need to run the 2-bash-sync.sh script in the Windows Terminal Window
+$name v$version 
 
-########################################################
+Synchronization Script for 
+Windows Public Limited Computers
 
-# Table of Contents / What does this script do?
+Last updated on $modified by $author
+____________________________________________
 
-# Line: 029 - Part 1: Control Checks
-# Line: 128 - Part 2: Set up & Configuration
-# Line: 156 - Part 3: Display the Welcome Message
-# Line: 178 - Part 4: Windows Explorer Settings
-# Line: 257 - Part 5: Cloning custom configs from GitHub
-# Line: 666 - Part 6: Scoop Installs
-# Line: 667 - Part 7: Finishing up
+"@
 
-########################################################
-########## Part 1: Control Checks ######################
-########################################################
+###################################
+# Test for admin
+###################################
 
-###############################################
-# Check #1: See if scoop is already installed
-###############################################
+function Test-Administrator  
+{  
+    [OutputType([bool])]
+    param()
+    process {
+        [Security.Principal.WindowsPrincipal]$user = [Security.Principal.WindowsIdentity]::GetCurrent();
+        return $user.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator);
+    }
+}
+
+# If the user is admin then display the message
+# Otherwise if the user is not admin don't display anything and cruise right by
+if(Test-Administrator)
+{ Get-Content -Path .\user-is-oped.txt }
+
+###################################
+# INSTALL SCOOP
+###################################
 
 # if the ~\scoop directory is not found we can assume scoop is not installed
 if (-not(Test-Path -Path "$HOME\scoop")) {
@@ -46,6 +60,7 @@ Preliminary Installs (via scoop):
 - `git` (used for installing and managing application packages, both for Windows & PowerShell
 - `powershell-yaml` (for reading our yml config file)
 - `glow` (used for supplying terminal feedback in Markdown)
+- `winget` Microsoft Package Manager
 
 "@
 
@@ -53,7 +68,12 @@ Preliminary Installs (via scoop):
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
 # And then install the prerequiste apps
-scoop install git glow powershell-yaml
+scoop install git glow powershell-yaml winget
+
+# Post install
+scoop update   # update scoop itself
+scoop update * # Update all apps installed with scoop
+scoop status   # Print Status
 
 # However if scoop is already installed 
 # (if the ~\scoop directory is found then run updates and skip the rest)
@@ -61,108 +81,67 @@ scoop install git glow powershell-yaml
 
 echo @"
 
-# Scoop & friends already installed, running update
+# Scoop & friends already installed, checking for updates
 
 "@ | glow -
 
-# 1. First update scoop itself
-scoop update
-
-# 2. Update all apps installed with scoop
-scoop update *
-
-# 3. Print the status after all the updates have been applied
-scoop status
+scoop update   # update scoop itself
+scoop update * # Update all apps installed with scoop
+scoop status   # Print Status
 
 }
 
-#############################################
-# Check 2: Does the User have admin ??????
-#############################################
 
-# Test for admin function: A self contained function to test the current user to see if they have admin
-function Test-Administrator  
-{  
-    [OutputType([bool])]
-    param()
-    process {
-        [Security.Principal.WindowsPrincipal]$user = [Security.Principal.WindowsIdentity]::GetCurrent();
-        return $user.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator);
-    }
-}
+##################################
+# 8rents Git Prefs
+##################################
 
-# If the user is admin then display the message
-# Otherwise if the user is not admin don't display anything and cruise right by
-if(Test-Administrator) 
-{
-# Admin is True
+echo @" 
 
-echo @"
-________________________________________________________
-    
-So you're running this as admin... This script is mainly for peons who are running limited accounts on public boxes.
+# Cloning Git Config
 
-You might as well just install Linux Subsystem, Hyper terminal and get vscode syncing flawlessly."
-        
-Honestly, running Cmder terminal with msys bash and a kludged portable vscode will seem less than elegant compared to 
-the power to actually use what you have.
+- **Source:** [8rents/git](https://github.com/8rents/git)
+- **Install Location:** ~\.config\git
 
-Here's what I suggest...
-    
-`wsl --install`
-    
-That will install Linux subsystem
+"@ | glow -
 
-Now you're all set... That's much better than this kludge of a mess... 
+git clone https://github.com/8rents/git $HOME\.config\git
 
-Anyway, Have a nice day :)
-
-________________________________________________________
-
-"@ 
-
-}
-
-###################################
-# Check 3: Is the user using a USB?
-###################################
-
-# Need to implement this
-
-########################################################
-###### Part 2: Set up & Configuration ##################
-########################################################
-# Working with a yaml file
-
-
-
-# Update some of the values in the hash table
-$config.modified = $modified
-$config.version = $version
-
-
-########################################################
-###### Part 3: Display THE Welcome Message #############
-########################################################
+$git_user = git config user.name
+$git_email = git config user.email
 
 echo @"
 
----------------------------------------------------------
+-- Git config check --
 
-WPL Sync Script
+username: $git_user
+email: $git_email
 
-Version: $config.version last updated on $config.modified
-
---------------------------------------------------------
+-- end config check --
 
 "@
 
-########################################################
-###### Part 4: Windows Explorer Settings ###############
-########################################################
+###################################
+# USB Check
+###################################
+
+echo "line 111: USB check functions will start here"
+
+###################################
+# Set up working with a YAML File
+###################################
+
+echo "line 117: Begin working with the YAML file in more depth here"
+
+###################################
+# Windows Explorer Settings
+###################################
+
 echo @"
 
 # Updating Windows Explorer Settings
+
+The following are the Windows Explorer settings that this script is currently changing:
 
 - Turning on Dark Mode
 - Enable Transparency
@@ -173,9 +152,9 @@ echo @"
 - Minimize the Ribbon
 - ShowInfoTip
 
----
+______________________________
 
-"@
+"@ | glow -
 
 
 $hkcu = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion"
@@ -183,12 +162,11 @@ $hkcu = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion"
 $path = "$hkcu\Themes\Personalize"
 
 echo @"
+________________________________
 
-# Personalizing Windows Theme
+# `\Themes\Personalize`
 
-$path
-
-"@
+"@ | glow -
 
 echo "Turning on Dark Mode"
 Set-ItemProperty -Path $path -Name AppsUseLightTheme -Value 0
@@ -202,64 +180,52 @@ Set-ItemProperty -Path $path -Name EnableTransparency -Value 1
 $path = "$hkcu\Explorer\Advanced"
 
 echo @"
+________________________________
 
-# Advanced Explorer Preferences
+# `\Explorer\Advanced`
 
-$path
+"@ | glow -
 
-"@
-
-
+echo "Showing hidden files"
 Set-ItemProperty -Path $path -Name Hidden -Value 1
+echo "Showing file extensions"
 Set-ItemProperty -Path $path -Name HideFileExt -Value 0
+echo "Showing system files and directories"
 Set-ItemProperty -Path $path -Name ShowSuperHidden -Value 1
 
-echo @"
-
-# Ribbon Preferences
-
-$path
-"@
-
-Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ribbon -Name ExplorerRibbonStartsMinimized -Value 1
-
-echo @"
-
-# ---------------------------------------
-
-# Status Bar Preferences
-
-# ---------------------------------------
-$path
-"@
-
-# Set Desktop Background
-
-
-
-########################################################
-##### Part 5: Cloning custom configs from GitHub #######
 ########################################################
 
+$path = "$hkcu\Explorer\Ribbon"
+
 echo @"
+______________________________
 
-# Cloning Preferences from GitHub
+# `\Explorer\Ribbon`
 
-- Typora
-- Git
-- PowerShell
-- Windows Terminal
-- vsCode
-- Bash Config (msys2) 
-- ZSH Config (msys2) 
+- Hiding ribbon by default
 
-"@
+______________________________
+
+# Additional settings to implement:
+
+- Status bar prefs
+- Set Desktop Background
+
+______________________________
+
+"@ | glow -
+
+Set-ItemProperty -Path $path -Name ExplorerRibbonStartsMinimized -Value 1
 
 
-# --------------------------
+# _____________________________________
+#
+#  End Windows Explorer Preferences
+# _____________________________________
+
+
+
 #  Typora Prefs
-# --------------------------
-
 
 echo @"
 
@@ -268,35 +234,11 @@ echo @"
 - **Sources:** [8rents/Typora](https://github.com/8rents/Typora)
 - **Install Location:** ~\AppData\Roaming\Typora"
 
-"@
+"@ | glow -
 
 git clone https://github.com/8rents/Typora $HOME\AppData\Roaming\Typora
 
-########################################################
-
-
-# --------------------------
-# Git Prefs
-# --------------------------
-
-echo @" 
-
-# Cloning Git Config
-
-- **Source:** [8rents/git](https://github.com/8rents/git)
-- **Install Location:** ~\.config\git
-
-"@ | glow -
-
-git clone https://github.com/8rents/git $HOME\.config\git
-
-
-########################################################
-
-
-# --------------------------
 # PowerShell Profiles
-# --------------------------
 
 echo @" 
 
@@ -311,11 +253,7 @@ echo @"
 git clone https://github.com/8rents/powershell $HOME\Documents\WindowsPowerShell
 
 
-########################################################
-
-# --------------------------
 #  Windows Term Prefs
-# --------------------------
 
 echo @"
 
@@ -324,35 +262,30 @@ echo @"
 - **Source:** [8rents/Windows-Terminal](https://github.com/8rents/Windows-Terminal)
 - **Install Location:** ~\scoop\apps\windows-terminal\current\settings
 
-"@
+"@ | glow - 
 
 git clone https://github.com/8rents/Windows-Terminal $HOME\scoop\apps\windows-terminal\current\settings
 
 
-
-########################################################
-
-# --------------------------
 #  vsCode Prefs
-# --------------------------
 
 echo @"
 
 # Cloning vsCode Preferences
 
+Note: vsCode is not currently working. 
+
 - **Sources:** [8rents/vscode](https://github.com/8rents/vscode)
 - **Install Location:** ~\scoop\apps\vscode\current\data
 
 
-"@
+"@ | glow - 
 
 git clone https://github.com/8rents/vscode $HOME\scoop\apps\vscode\current\data
 
 
-# --------------------------
+
 # Bash Configuration
-# Installs to 
-# --------------------------
 
 echo @" 
 
@@ -372,29 +305,13 @@ git clone https://github.com/8rents/bash $HOME\Settings\Shells\Bash
 
 cd $HOME\Settings\Shells\Bash
 
-
 # fetch all branches in the origin repo (GitHub)
 git fetch origin
 
 # switch to windows branch
 git checkout -b windows origin/windows
 
-
-
-# Symlink Bash DotFiles to $Home Directory
-
-# link bash rc file - rc.bash .bashrc
-ln -s C:\Users\sfplinternet\Settings\Shells\Bash\rc.bash $HOME\.bashrc
-
-# link bash lougout - logout.bash .bash_logout
-ln -s C:\Users\sfplinternet\Settings\Shells\Bash\logout.bash $HOME\.bash_logout
-
-# LINK BASH POFILE - profile.bash .bash_profile
-ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.bash $HOME\.bash_profile
-
-
-# link general profile - profile.sh .profile
-ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.sh $HOME\.profile
+# All Powershell and Windows apps
 
 
 echo @"
@@ -407,6 +324,7 @@ echo @"
 - `vcredist2022` - A bucket or library recommended by starship amonst others
 - `starship` - Newer command prompt (need to get nerd fonts properly automated)
 - `windows-terminal` - A decent termianl emulator
+- `soulseekqt` - The SoulSeek File sharing network.
 - `msys2` - Linux kludge with bash and pacman
 - `github` - GitHub Desktop, GUI Based git versioning
 - `lazygit` - alternative cli for git
@@ -422,39 +340,32 @@ echo @"
 - `python` - Python programming language (installs pip package manager)
 - `neofetch` - neat little terminal util to display system info
 - `electrum` - The best bitcoin wallet
+- `oh-my-posh` - Better PowerShell Interface
 ---
 
 "@ | glow -
 
 scoop bucket add extras
-scoop install typora vcredist2022 starship windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs yarn pnpm python neofetch electrum
+scoop install typora vcredist2022 starship oh-my-posh windows-terminal msys2 github lazygit vscode sublime-text sublime-merge eza psfzf autojump nodejs yarn pnpm python neofetch electrum
+
+###################################
+# Installing Nerd Fonts
+###################################
 
 echo @"
 
-# Getting Docker Installed
+Here are some resources to installing fonts automatically from PowerShell
 
-- `docker` - The base package to build containers on
-- `docker-compose` - handy utlity to be able to manage containers with compose.yml files
-- `dockercompletion` - autocomplete for docker
-- `lazydocker` - Like `lazygit` but `lazydocker`
+- [Using Scoop to install Nerd Fonts(https://github.com/matthewjberger/scoop-nerd-fonts)
+- [Nerd Font Official Installation method - Install.ps1](https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#option-6-install-script)
+- [SuperUser Guide to Installing Nerd Fonts with WinGet](https://superuser.com/questions/1765024/downloading-and-installing-fonts-using-powershell-commands-only)
+- [A semi-shitty Medium article on Nerd Fonts in PowerShell](https://medium.com/@vedantkadam541/beautify-your-windows-terminal-using-nerd-fonts-and-oh-my-posh-4f4393f097)
 
-"@
+"@ | glow - 
 
-scoop install docker docker-compose dockercompletion lazydocker
-
-
-
-
-
-
-########################################################
-############### Part 7: Finishing up ###################
-########################################################
-
-
-# --------------------------
-#  Opening Apps
-# --------------------------
+###################################
+# Opening Apps
+###################################
 
 
 echo @"
@@ -473,7 +384,7 @@ ii "$HOME\scoop\apps\github\current\GitHubDesktop.exe"
 ii "$HOME\scoop\apps\windows-terminal\current\WindowsTerminal.exe"
 ii "$HOME\scoop\apps\typora\current\Typora.exe"
 
-echo @"
+echo @" | glow -
 
 # Re-encodiong YAML config
 
@@ -485,6 +396,56 @@ The actual `config.yml` file is not overwritten.
 
 It's basically read-only. 
 
-"@
+"@ | glow -
 
 # $env:config = $config | ConvertTo-Yaml
+
+
+
+# --------------------------
+# Current State of the Script Message
+# For keeping myself updated about hwere I left off
+# --------------------------
+
+echo "@
+
+# Current State of this PowerShell Script
+
+## Critical issues to fix
+
+### vsCode is not currently working. 
+
+Steps to trying to fix vsCode:
+
+1. Remove downloading and installing the prefs from GitHub (line: 326)
+2. Install vsCode through winget
+
+If these don't fix vsCode, then just use the web IDE for the time being.
+
+Articles on the Subject
+
+- [Using WinGet to Install Portable apps](https://github.com/microsoft/winget-cli/blob/master/doc/specs/%23182%20-%20Support%20for%20installation%20of%20portable%20standalone%20apps.md)
+
+---
+
+## Improvements to make
+
+1. Install a Nerd Font and add it to the `~\Documents\.profile` to be used when script completes
+2. Add program prefs to the `~\Documents\.profile` like: 
+    - `eza` aka `ls` aliases
+    - `fzf`
+    - `jump`
+3. Remove the entire Docker section
+
+---
+
+## PowerShell Configuration Articles
+
+- [Helpful PowerShell Aliases](https://github.com/codenewa/helpful-alias-powershell)
+- [RedHat Guide to using FZF]](https://redhat.com/sysadmin/fzf-linux-fuzzy-finder)
+
+---
+
+*Sally sells PowerShells by the sea shore*
+
+@" | glow -
