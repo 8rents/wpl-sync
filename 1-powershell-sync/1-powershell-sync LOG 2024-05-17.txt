@@ -1,0 +1,689 @@
+PS D:\Repo\Devices\WPL\Sync> .\1-powershell-sync.ps1
+
+Preliminary Installs (via scoop):
+
+- scoop (PowerShell & Windows Package Manager)
+- git (used for installing and managing application packages, both for Windows & PowerShell
+- powershell-yaml (for reading our yml config file)
+- glow (used for supplying terminal feedback in Markdown)
+
+Initializing...
+Downloading...
+Extracting...
+Creating shim...
+Adding ~\scoop\shims to your path.
+Scoop was installed successfully!
+Type 'scoop help' for instructions.
+Installing '7zip' (24.05) [64bit] from 'main' bucket
+7z2405-x64.msi (1.9 MB) [=====================================================================================] 100%
+Checking hash of 7z2405-x64.msi ... ok.
+Extracting 7z2405-x64.msi ... done.
+Linking ~\scoop\apps\7zip\current => ~\scoop\apps\7zip\24.05
+Creating shim for '7z'.
+Creating shim for '7zFM'.
+Making C:\Users\sfplinternet\scoop\shims\7zfm.exe a GUI binary.
+Creating shim for '7zG'.
+Making C:\Users\sfplinternet\scoop\shims\7zg.exe a GUI binary.
+Creating shortcut for 7-Zip (7zFM.exe)
+Persisting Codecs
+Persisting Formats
+Running post_install script...
+'7zip' (24.05) was installed successfully!
+Notes
+-----
+Add 7-Zip as a context menu option by running: "C:\Users\sfplinternet\scoop\apps\7zip\current\install-context.reg"
+Installing 'git' (2.45.1) [64bit] from 'main' bucket
+PortableGit-2.45.1-64-bit.7z.exe (59.8 MB) [==================================================================] 100%
+Checking hash of PortableGit-2.45.1-64-bit.7z.exe ... ok.
+Extracting dl.7z ... done.
+Linking ~\scoop\apps\git\current => ~\scoop\apps\git\2.45.1
+Creating shim for 'sh'.
+Creating shim for 'bash'.
+Creating shim for 'git'.
+Creating shim for 'gitk'.
+Making C:\Users\sfplinternet\scoop\shims\gitk.exe a GUI binary.
+Creating shim for 'git-gui'.
+Making C:\Users\sfplinternet\scoop\shims\git-gui.exe a GUI binary.
+Creating shim for 'scalar'.
+Creating shim for 'tig'.
+Creating shim for 'git-bash'.
+Making C:\Users\sfplinternet\scoop\shims\git-bash.exe a GUI binary.
+Creating shortcut for Git Bash (git-bash.exe)
+Creating shortcut for Git GUI (git-gui.exe)
+Running post_install script...
+'git' (2.45.1) was installed successfully!
+Notes
+-----
+Set Git Credential Manager Core by running: "git config --global credential.helper manager"
+
+To add context menu entries, run 'C:\Users\sfplinternet\scoop\apps\git\current\install-context.reg'
+
+To create file-associations for .git* and .sh files, run
+'C:\Users\sfplinternet\scoop\apps\git\current\install-file-associations.reg'
+Installing 'glow' (1.5.1) [64bit] from 'main' bucket
+glow_Windows_x86_64.zip (6.3 MB) [============================================================================] 100%
+Checking hash of glow_Windows_x86_64.zip ... ok.
+Extracting glow_Windows_x86_64.zip ... done.
+Linking ~\scoop\apps\glow\current => ~\scoop\apps\glow\1.5.1
+Creating shim for 'glow'.
+'glow' (1.5.1) was installed successfully!
+Installing 'powershell-yaml' (0.4.7) [64bit] from 'main' bucket
+powershell-yaml.0.4.7.nupkg (411.3 KB) [======================================================================] 100%
+Checking hash of powershell-yaml.0.4.7.nupkg ... ok.
+Extracting powershell-yaml.0.4.7.nupkg ... done.
+Running pre_install script...
+Linking ~\scoop\apps\powershell-yaml\current => ~\scoop\apps\powershell-yaml\0.4.7
+Adding ~\scoop\modules to your PowerShell module path.
+Installing PowerShell module 'powershell-yaml'
+Linking ~\scoop\modules\powershell-yaml => ~\scoop\apps\powershell-yaml\current
+'powershell-yaml' (0.4.7) was installed successfully!
+The property 'modified' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:140 char:1
++ $config.modified = $modified
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+The property 'version' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:141 char:1
++ $config.version = $version
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+
+---------------------------------------------------------
+
+WPL Sync Script
+
+Version: .version last updated on .modified
+
+--------------------------------------------------------
+
+
+# Updating Windows Explorer Settings
+
+- Turning on Dark Mode
+- Enable Transparency
+- Show Hidden Files
+- Show File Extensions
+- Hide the Status Bar
+- Show All Folders
+- Minimize the Ribbon
+- ShowInfoTip
+
+---
+
+
+# Personalizing Windows Theme
+
+HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize
+
+Turning on Dark Mode
+Enabling Transparency
+
+# Advanced Explorer Preferences
+
+HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+
+# Ribbon Preferences
+
+HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+# ---------------------------------------
+
+# Status Bar Preferences
+
+# ---------------------------------------
+HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+# Cloning Preferences from GitHub
+
+- Typora
+- Git
+- PowerShell
+- Windows Terminal
+- vsCode
+- Bash Config (msys2)
+- ZSH Config (msys2)
+
+
+# Cloning Typora Preferences from GitHub
+
+- **Sources:** [8rents/Typora](https://github.com/8rents/Typora)
+- **Install Location:** ~\AppData\Roaming\Typora"
+
+fatal: destination path 'C:\Users\sfplinternet\AppData\Roaming\Typora' already exists and is not an empty directory.
+
+   Cloning Git Config
+
+  • Source: 8rents/git https://github.com/8rents/git
+  • Install Location: ~\.config\git
+
+Cloning into 'C:\Users\sfplinternet\.config\git'...
+remote: Enumerating objects: 36, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 36 (delta 14), reused 28 (delta 9), pack-reused 0
+Receiving objects: 100% (36/36), 9.72 KiB | 711.00 KiB/s, done.
+Resolving deltas: 100% (14/14), done.
+
+   Cloning PowerShell Profiles
+
+  • Source: 8rents/powershell https://github.com/8rents/powershell
+  • Install Location: ~\Documents\WindowsPowerShell
+
+Cloning into 'C:\Users\sfplinternet\Documents\WindowsPowerShell'...
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 20 (delta 6), reused 12 (delta 2), pack-reused 0
+Receiving objects: 100% (20/20), done.
+Resolving deltas: 100% (6/6), done.
+
+# Cloning Windows Terminal Preferences
+
+- **Source:** [8rents/Windows-Terminal](https://github.com/8rents/Windows-Terminal)
+- **Install Location:** ~\scoop\apps\windows-terminal\current\settings
+
+Cloning into 'C:\Users\sfplinternet\scoop\apps\windows-terminal\current\settings'...
+remote: Enumerating objects: 240, done.
+remote: Counting objects: 100% (240/240), done.
+remote: Compressing objects: 100% (128/128), done.
+remote: Total 240 (delta 102), reused 212 (delta 74), pack-reused 0
+Receiving objects: 100% (240/240), 924.05 KiB | 4.81 MiB/s, done.
+Resolving deltas: 100% (102/102), done.
+
+# Cloning vsCode Preferences
+
+- **Sources:** [8rents/vscode](https://github.com/8rents/vscode)
+- **Install Location:** ~\scoop\apps\vscode\current\data
+
+
+Cloning into 'C:\Users\sfplinternet\scoop\apps\vscode\current\data'...
+remote: Enumerating objects: 70, done.
+remote: Counting objects: 100% (70/70), done.
+remote: Compressing objects: 100% (32/32), done.
+remote: Total 70 (delta 23), reused 64 (delta 20), pack-reused 0
+Receiving objects: 100% (70/70), 104.24 KiB | 1.43 MiB/s, done.
+Resolving deltas: 100% (23/23), done.
+
+   Cloning Bash Config
+
+  Warning - This script has to be run from the bash shell. Symlinks from PowerShell will not work.
+
+  ## Configuration Details
+
+  • Source: 8rents/bash https://github.com/8rents/bash
+  • Install Location: /c/Users/sfplinternet/Settings/Shells/Bash
+  • Symlink files to: /c/Users/sfplinternet/
+
+Cloning into 'C:\Users\sfplinternet\Settings\Shells\Bash'...
+remote: Enumerating objects: 23, done.
+remote: Counting objects: 100% (23/23), done.
+remote: Compressing objects: 100% (17/17), done.
+remote: Total 23 (delta 7), reused 20 (delta 4), pack-reused 0
+Receiving objects: 100% (23/23), 5.13 KiB | 2.56 MiB/s, done.
+Resolving deltas: 100% (7/7), done.
+branch 'windows' set up to track 'origin/windows'.
+Switched to a new branch 'windows'
+ln : The term 'ln' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:387 char:1
++ ln -s C:\Users\sfplinternet\Settings\Shells\Bash\rc.bash $HOME\.bashr ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ln:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ln : The term 'ln' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:390 char:1
++ ln -s C:\Users\sfplinternet\Settings\Shells\Bash\logout.bash $HOME\.b ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ln:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ln : The term 'ln' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:393 char:1
++ ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.bash $HOME\. ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ln:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+ln : The term 'ln' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At D:\Repo\Devices\WPL\Sync\1-powershell-sync.ps1:397 char:1
++ ln -s C:\Users\sfplinternet\Settings\Shells\Bash\profile.sh $HOME\.pr ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ln:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+
+
+  --------
+
+   Installing Windows & Powershell apps via scoop:
+
+  • ypora - Beautiful markdown editor
+  •
+credist2022 - A bucket or library recommended by starship amonst others
+  • starship - Newer command prompt (need to get nerd fonts properly automated)
+  • windows-terminal - A decent termianl emulator
+  • msys2 - Linux kludge with bash and pacman
+  • github - GitHub Desktop, GUI Based git versioning
+  • lazygit - alternative cli for git
+  •
+scode - Modern IDE (that isn't working half the time)
+  • sublime-text - Halfway Modern Editor (incase VScode isn't working)
+  • sublime-merge - Git client for sublime text
+  • eza (based on exa [ls replacement])
+  • psfzf (PowerShell wrapper around FZF)
+  • utojump - CLI tool that remembers the directories you've been to the most.
+  •
+
+  odejs - Server side javascript development (installs npm [package manager])
+
+  • yarn - A slightly better package manager than npm
+  • pnpm - An even better package manager than yarn. PNPM downloads each dependency only one time making
+  ode_modules folders a helluva lot smaller.
+  • python - Python programming language (installs pip package manager)
+  •
+
+  eofetch - neat little terminal util to display system info
+
+  • electrum - The best bitcoin wallet
+  • oh-my-posh - Better PowerShell Interface
+
+  --------
+
+Checking repo... OK
+The extras bucket was added successfully.
+WARN  Purging previous failed installation of windows-terminal.
+ERROR 'windows-terminal' isn't installed correctly.
+
+Confirm
+The item at C:\Users\sfplinternet\scoop\apps\windows-terminal\current has children and the Recurse parameter was not
+specified. If you continue, all children will be removed with the item. Are you sure you want to continue?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): Y
+'windows-terminal' was uninstalled.
+WARN  Purging previous failed installation of vscode.
+ERROR 'vscode' isn't installed correctly.
+
+Confirm
+The item at C:\Users\sfplinternet\scoop\apps\vscode\current has children and the Recurse parameter was not specified.
+If you continue, all children will be removed with the item. Are you sure you want to continue?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+'vscode' was uninstalled.
+Installing 'autojump' (0.5.1) [64bit] from 'extras' bucket
+autojump-x86_64-pc-windows-msvc.zip (635.8 KB) [==============================================================] 100%
+Checking hash of autojump-x86_64-pc-windows-msvc.zip ... ok.
+Extracting autojump-x86_64-pc-windows-msvc.zip ... done.
+Linking ~\scoop\apps\autojump\current => ~\scoop\apps\autojump\0.5.1
+Creating shim for 'autojump'.
+'autojump' (0.5.1) was installed successfully!
+Installing 'electrum' (4.5.4) [64bit] from 'extras' bucket
+electrum-4.5.4-portable.exe (45.6 MB) [=======================================================================] 100%
+Checking hash of electrum-4.5.4-portable.exe ... ok.
+Running pre_install script...
+Linking ~\scoop\apps\electrum\current => ~\scoop\apps\electrum\4.5.4
+Creating shim for 'electrum'.
+Making C:\Users\sfplinternet\scoop\shims\electrum.exe a GUI binary.
+Creating shortcut for Electrum (electrum.exe)
+Persisting electrum_data
+'electrum' (4.5.4) was installed successfully!
+Installing 'eza' (0.18.16) [64bit] from 'main' bucket
+eza.exe_x86_64-pc-windows-gnu.zip (1.0 MB) [==================================================================] 100%
+Checking hash of eza.exe_x86_64-pc-windows-gnu.zip ... ok.
+Extracting eza.exe_x86_64-pc-windows-gnu.zip ... done.
+Linking ~\scoop\apps\eza\current => ~\scoop\apps\eza\0.18.16
+Creating shim for 'eza'.
+Creating shim for 'exa'.
+'eza' (0.18.16) was installed successfully!
+Installing 'github' (3.3.18) [64bit] from 'extras' bucket
+dl.7z_ (151.7 MB) [===========================================================================================] 100%
+Checking hash of dl.7z_ ... ok.
+Running pre_install script...
+Linking ~\scoop\apps\github\current => ~\scoop\apps\github\3.3.18
+Creating shim for 'GitHubDesktop'.
+Making C:\Users\sfplinternet\scoop\shims\githubdesktop.exe a GUI binary.
+Creating shortcut for GitHub Desktop (GitHubDesktop.exe)
+'github' (3.3.18) was installed successfully!
+Installing 'lazygit' (0.41.0) [64bit] from 'extras' bucket
+lazygit_0.41.0_Windows_x86_64.zip (6.3 MB) [==================================================================] 100%
+Checking hash of lazygit_0.41.0_Windows_x86_64.zip ... ok.
+Extracting lazygit_0.41.0_Windows_x86_64.zip ... done.
+Linking ~\scoop\apps\lazygit\current => ~\scoop\apps\lazygit\0.41.0
+Creating shim for 'lazygit'.
+'lazygit' (0.41.0) was installed successfully!
+Installing 'msys2' (2024-05-07) [64bit] from 'main' bucket
+msys2-base-x86_64-20240507.tar.xz (47.4 MB) [=================================================================] 100%
+Checking hash of msys2-base-x86_64-20240507.tar.xz ... ok.
+Extracting msys2-base-x86_64-20240507.tar.xz ... done.
+Linking ~\scoop\apps\msys2\current => ~\scoop\apps\msys2\2024-05-07
+Creating shim for 'msys2'.
+Creating shim for 'mingw'.
+Creating shim for 'mingw32'.
+Creating shim for 'mingw64'.
+Creating shim for 'clang32'.
+Creating shim for 'clang64'.
+Creating shim for 'clangarm64'.
+Creating shim for 'ucrt64'.
+Creating shortcut for MSYS2 (msys2.exe)
+Creating shortcut for MinGW32 (mingw32.exe)
+Creating shortcut for MinGW64 (mingw64.exe)
+Creating shortcut for Clang32 (clang32.exe)
+Creating shortcut for Clang64 (clang64.exe)
+Creating shortcut for ClangArm64 (clangarm64.exe)
+Creating shortcut for UCRT64 (ucrt64.exe)
+Persisting home
+'msys2' (2024-05-07) was installed successfully!
+Notes
+-----
+Please run 'msys2' now for the MSYS2 setup to complete!
+Installing 'neofetch' (7.1.0) [64bit] from 'main' bucket
+neofetch (333.6 KB) [=========================================================================================] 100%
+Checking hash of neofetch ... ok.
+Linking ~\scoop\apps\neofetch\current => ~\scoop\apps\neofetch\7.1.0
+Creating shim for 'neofetch'.
+'neofetch' (7.1.0) was installed successfully!
+Installing 'nodejs' (22.2.0) [64bit] from 'main' bucket
+node-v22.2.0-win-x64.7z (19.1 MB) [===========================================================================] 100%
+Checking hash of node-v22.2.0-win-x64.7z ... ok.
+Extracting node-v22.2.0-win-x64.7z ... done.
+Linking ~\scoop\apps\nodejs\current => ~\scoop\apps\nodejs\22.2.0
+Adding ~\scoop\apps\nodejs\current\bin to your path.
+Adding ~\scoop\apps\nodejs\current to your path.
+Persisting bin
+Persisting cache
+Running post_install script...
+'nodejs' (22.2.0) was installed successfully!
+Installing 'oh-my-posh' (19.30.0) [64bit] from 'main' bucket
+themes.zip (127.8 KB) [=======================================================================================] 100%
+Checking hash of themes.zip ... ok.
+posh-windows-amd64.exe (16.7 MB) [============================================================================] 100%
+Checking hash of posh-windows-amd64.exe ... ok.
+Extracting themes.zip ... done.
+Linking ~\scoop\apps\oh-my-posh\current => ~\scoop\apps\oh-my-posh\19.30.0
+Creating shim for 'oh-my-posh'.
+'oh-my-posh' (19.30.0) was installed successfully!
+Notes
+-----
+Refer to 'https://ohmyposh.dev/docs/installation/prompt' for shell specific configurations.
+Installing 'pnpm' (9.1.1) [64bit] from 'main' bucket
+pnpm-win-x64.exe (48.5 MB) [==================================================================================] 100%
+Checking hash of pnpm-win-x64.exe ... ok.
+Linking ~\scoop\apps\pnpm\current => ~\scoop\apps\pnpm\9.1.1
+Creating shim for 'pnpm'.
+'pnpm' (9.1.1) was installed successfully!
+Installing 'psfzf' (2.6.1) [64bit] from 'extras' bucket
+psfzf.2.6.1.nupkg (62.8 KB) [=================================================================================] 100%
+Checking hash of psfzf.2.6.1.nupkg ... ok.
+Extracting psfzf.2.6.1.nupkg ... done.
+Running pre_install script...
+Linking ~\scoop\apps\psfzf\current => ~\scoop\apps\psfzf\2.6.1
+Installing PowerShell module 'PSFzf'
+Linking ~\scoop\modules\PSFzf => ~\scoop\apps\psfzf\current
+'psfzf' (2.6.1) was installed successfully!
+Installing 'dark' (3.14) [64bit] from 'main' bucket
+dark-3.14.zip (5.0 MB) [======================================================================================] 100%
+Checking hash of dark-3.14.zip ... ok.
+Extracting dark-3.14.zip ... done.
+Linking ~\scoop\apps\dark\current => ~\scoop\apps\dark\3.14
+Creating shim for 'dark'.
+'dark' (3.14) was installed successfully!
+Installing 'python' (3.12.3) [64bit] from 'main' bucket
+python-3.12.3-amd64.exe (25.5 MB) [===========================================================================] 100%
+Checking hash of python-3.12.3-amd64.exe ... ok.
+Running pre_install script...
+Running installer script...
+Linking ~\scoop\apps\python\current => ~\scoop\apps\python\3.12.3
+Creating shim for 'python3'.
+Creating shim for 'idle'.
+Creating shim for 'idle3'.
+Adding ~\scoop\apps\python\current\Scripts to your path.
+Adding ~\scoop\apps\python\current to your path.
+Persisting Scripts
+Persisting Lib\site-packages
+Running post_install script...
+
+'python' (3.12.3) was installed successfully!
+Notes
+-----
+Allow applications and third-party installers to find python by running:
+"C:\Users\sfplinternet\scoop\apps\python\current\install-pep-514.reg"
+Installing 'starship' (1.19.0) [64bit] from 'main' bucket
+starship-x86_64-pc-windows-msvc.zip (3.2 MB) [================================================================] 100%
+Checking hash of starship-x86_64-pc-windows-msvc.zip ... ok.
+Extracting starship-x86_64-pc-windows-msvc.zip ... done.
+Linking ~\scoop\apps\starship\current => ~\scoop\apps\starship\1.19.0
+Creating shim for 'starship'.
+'starship' (1.19.0) was installed successfully!
+Notes
+-----
+Usage: Add 'Invoke-Expression (&starship init powershell)' to the end of your PowerShell $PROFILE.
+Prerequisites: A Powerline font installed and enabled in your terminal.
+Installing 'sublime-merge' (2096) [64bit] from 'extras' bucket
+sublime_merge_build_2096_x64.zip (36.3 MB) [==================================================================] 100%
+Checking hash of sublime_merge_build_2096_x64.zip ... ok.
+Extracting sublime_merge_build_2096_x64.zip ... done.
+Linking ~\scoop\apps\sublime-merge\current => ~\scoop\apps\sublime-merge\2096
+Creating shim for 'smerge'.
+Creating shortcut for Sublime Merge (sublime_merge.exe)
+Persisting Data
+Running post_install script...
+'sublime-merge' (2096) was installed successfully!
+Notes
+-----
+Sublime Merge may be downloaded and evaluated for free, however a license must be purchased for continued use. There is
+currently no enforced time limit for the evaluation. For more information please see https://www.sublimemerge.com/
+Add Sublime Merge as a context menu option by running:
+reg import "C:\Users\sfplinternet\scoop\apps\sublime-merge\current\install-context.reg"
+Installing 'sublime-text' (4-4169) [64bit] from 'extras' bucket
+sublime_text_build_4169_x64.zip (22.1 MB) [===================================================================] 100%
+Checking hash of sublime_text_build_4169_x64.zip ... ok.
+Extracting sublime_text_build_4169_x64.zip ... done.
+Linking ~\scoop\apps\sublime-text\current => ~\scoop\apps\sublime-text\4-4169
+Creating shim for 'subl'.
+Creating shortcut for Sublime Text 4 (sublime_text.exe)
+Persisting Data
+Running post_install script...
+'sublime-text' (4-4169) was installed successfully!
+Notes
+-----
+Add Sublime Text as a context menu option by running:
+reg import "C:\Users\sfplinternet\scoop\apps\sublime-text\current\install-context.reg"
+Installing 'innounp' (0.50) [64bit] from 'main' bucket
+innounp050.rar (138.3 KB) [===================================================================================] 100%
+Checking hash of innounp050.rar ... ok.
+Extracting innounp050.rar ... done.
+Linking ~\scoop\apps\innounp\current => ~\scoop\apps\innounp\0.50
+Creating shim for 'innounp'.
+'innounp' (0.50) was installed successfully!
+Installing 'typora' (1.8.10) [64bit] from 'extras' bucket
+typora-setup-x64-1.8.10.exe (81.3 MB) [=======================================================================] 100%
+Checking hash of typora-setup-x64-1.8.10.exe ... ok.
+Extracting typora-setup-x64-1.8.10.exe ... done.
+Linking ~\scoop\apps\typora\current => ~\scoop\apps\typora\1.8.10
+Creating shim for 'Typora'.
+Making C:\Users\sfplinternet\scoop\shims\typora.exe a GUI binary.
+Creating shortcut for Typora (Typora.exe)
+'typora' (1.8.10) was installed successfully!
+Notes
+-----
+For old beta version, install: versions/typora0.11.18
+Installing 'vcredist2022' (14.38.33135.0) [64bit] from 'extras' bucket
+vc_redist.x64.exe (24.2 MB) [=================================================================================] 100%
+Checking hash of vc_redist.x64.exe ... ok.
+vc_redist.x86.exe (13.2 MB) [=================================================================================] 100%
+Checking hash of vc_redist.x86.exe ... ok.
+Linking ~\scoop\apps\vcredist2022\current => ~\scoop\apps\vcredist2022\14.38.33135.0
+Running post_install script...
+ERROR Exception calling "Start" with "0" argument(s): "No application is associated with the specified file for this operation"
+ERROR Exception calling "Start" with "0" argument(s): "No application is associated with the specified file for this operation"
+'vcredist2022' (14.38.33135.0) was installed successfully!
+Notes
+-----
+You can now remove this installer with 'scoop uninstall vcredist2022'
+Installing 'vscode' (1.89.1) [64bit] from 'extras' bucket
+dl.7z (131.9 MB) [============================================================================================] 100%
+Checking hash of dl.7z ... ok.
+Extracting dl.7z ... done.
+Linking ~\scoop\apps\vscode\current => ~\scoop\apps\vscode\1.89.1
+Creating shortcut for Visual Studio Code (code.exe)
+Adding ~\scoop\apps\vscode\current\bin to your path.
+Persisting data
+Running post_install script...
+'vscode' (1.89.1) was installed successfully!
+Notes
+-----
+Add Visual Studio Code as a context menu option by running:
+'reg import "C:\Users\sfplinternet\scoop\apps\vscode\current\install-context.reg"'
+For file associations, run:
+'reg import "C:\Users\sfplinternet\scoop\apps\vscode\current\install-associations.reg"'
+Installing 'windows-terminal' (1.20.11271.0) [64bit] from 'extras' bucket
+Microsoft.WindowsTerminal_1.20.11271.0_x64.zip (11.0 MB) [====================================================] 100%
+Checking hash of Microsoft.WindowsTerminal_1.20.11271.0_x64.zip ... ok.
+Extracting Microsoft.WindowsTerminal_1.20.11271.0_x64.zip ... done.
+Running pre_install script...
+Running installer script...
+Linking ~\scoop\apps\windows-terminal\current => ~\scoop\apps\windows-terminal\1.20.11271.0
+Creating shim for 'WindowsTerminal'.
+Making C:\Users\sfplinternet\scoop\shims\windowsterminal.exe a GUI binary.
+Creating shim for 'wt'.
+Making C:\Users\sfplinternet\scoop\shims\wt.exe a GUI binary.
+Creating shortcut for Windows Terminal (WindowsTerminal.exe)
+Persisting .portable
+Persisting settings
+Running post_install script...
+'windows-terminal' (1.20.11271.0) was installed successfully!
+Notes
+-----
+Add Windows Terminal as a context menu option by running `reg import
+"C:\Users\sfplinternet\scoop\apps\windows-terminal\current\install-context.reg"`
+Installing 'yarn' (1.22.19) [64bit] from 'main' bucket
+yarn-v1.22.19.tar.gz (1.2 MB) [===============================================================================] 100%
+Checking hash of yarn-v1.22.19.tar.gz ... ok.
+Extracting yarn-v1.22.19.tar.gz ... done.
+Linking ~\scoop\apps\yarn\current => ~\scoop\apps\yarn\1.22.19
+Adding ~\scoop\apps\yarn\current\global\node_modules\.bin to your path.
+Adding ~\scoop\apps\yarn\current\bin to your path.
+Persisting cache
+Persisting global
+Persisting mirror
+Running post_install script...
+yarn config v1.22.19
+success Set "cache-folder" to "C:\\Users\\sfplinternet\\scoop\\apps\\yarn\\current\\cache".
+Done in 0.03s.
+yarn config v1.22.19
+success Set "yarn-offline-mirror" to "C:\\Users\\sfplinternet\\scoop\\apps\\yarn\\current\\mirror".
+Done in 0.03s.
+yarn config v1.22.19
+success Set "global-folder" to "C:\\Users\\sfplinternet\\scoop\\apps\\yarn\\current\\global".
+Done in 0.03s.
+yarn config v1.22.19
+success Set "prefix" to "C:\\Users\\sfplinternet\\scoop\\apps\\yarn\\current\\global".
+Done in 0.03s.
+'yarn' (1.22.19) was installed successfully!
+'psfzf' suggests installing 'fzf'.
+
+# Getting Docker Installed
+
+- docker - The base package to build containers on
+- docker-compose - handy utlity to be able to manage containers with compose.yml files
+- dockercompletion - autocomplete for docker
+- lazydocker - Like lazygit but lazydocker
+
+Installing 'docker' (26.1.3) [64bit] from 'main' bucket
+docker-26.1.3.zip (37.7 MB) [=================================================================================] 100%
+Checking hash of docker-26.1.3.zip ... ok.
+Extracting docker-26.1.3.zip ... done.
+Linking ~\scoop\apps\docker\current => ~\scoop\apps\docker\26.1.3
+Creating shim for 'docker'.
+Creating shim for 'dockerd'.
+'docker' (26.1.3) was installed successfully!
+Notes
+-----
+The 'dockerd' binary here only supports running Windows containers.
+However it is possible to connect to existing Linux containers using the 'docker' binary
+To register Docker as a service, run `dockerd --register-service`
+Similarly, to unregister, run `dockerd --unregister-service`
+Installing 'dockercompletion' (1.2600.0.240409) [64bit] from 'extras' bucket
+dockercompletion.1.2600.0.240409.nupkg (43.9 KB) [============================================================] 100%
+Checking hash of dockercompletion.1.2600.0.240409.nupkg ... ok.
+Extracting dockercompletion.1.2600.0.240409.nupkg ... done.
+Running pre_install script...
+Linking ~\scoop\apps\dockercompletion\current => ~\scoop\apps\dockercompletion\1.2600.0.240409
+Installing PowerShell module 'DockerCompletion'
+Linking ~\scoop\modules\DockerCompletion => ~\scoop\apps\dockercompletion\current
+'dockercompletion' (1.2600.0.240409) was installed successfully!
+Installing 'docker-compose' (2.27.0) [64bit] from 'main' bucket
+docker-compose-windows-x86_64.exe (61.1 MB) [=================================================================] 100%
+Checking hash of docker-compose-windows-x86_64.exe ... ok.
+Linking ~\scoop\apps\docker-compose\current => ~\scoop\apps\docker-compose\2.27.0
+Creating shim for 'docker-compose'.
+Running post_install script...
+Installing docker-compose as docker-cli plugin...
+'docker-compose' (2.27.0) was installed successfully!
+Installing 'lazydocker' (0.23.1) [64bit] from 'main' bucket
+lazydocker_0.23.1_Windows_x86_64.zip (4.4 MB) [===============================================================] 100%
+Checking hash of lazydocker_0.23.1_Windows_x86_64.zip ... ok.
+Extracting lazydocker_0.23.1_Windows_x86_64.zip ... done.
+Linking ~\scoop\apps\lazydocker\current => ~\scoop\apps\lazydocker\0.23.1
+Creating shim for 'lazydocker'.
+'lazydocker' (0.23.1) was installed successfully!
+
+   Opening Apps from ~\scoop\apps directory:
+
+  • GitHub @ github\current\GitHubDesktop.exe
+  • vsCode @ vscode\current\Code.exe
+  • Typora @ typora\current\Typora.exe
+  • Terminal @ windows-terminal\current\WindowsTerminal.exe
+
+
+
+# Re-encodiong YAML config
+
+Adding any changes to the local config back to the
+global env variable. Encoded as YAML
+
+**Note:** that this will only be available within PowerShell
+The actual config.yml file is not overwritten.
+
+It's basically read-only.
+
+PS C:\Users\sfplinternet\Settings\Shells\Bash>
+[desktop-notifications] [error] Failed to initialize with RO_INIT_MULTITHREADED: -2147417850
+[desktop-notifications] [error] Couldn't retrieve AUMID
+error: [main] Error looking for toast activator CLSID in shortcut C:\Users\sfplinternet\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub Desktop.lnk
+Error: Failed to read shortcut link
+    at ne (D:\Repo\Devices\WPL\webpack:\app\src\lib\find-toast-activator-clsid.ts:38:29)
+    at D:\Repo\Devices\WPL\webpack:\app\src\lib\find-toast-activator-clsid.ts:26:33
+    at D:\Repo\Devices\WPL\webpack:\app\src\main-process\notifications.ts:28:32
+    at D:\Repo\Devices\WPL\webpack:\app\src\main-process\main.ts:722:7
+    at Object.<anonymous> (D:\Repo\Devices\WPL\webpack:\app\src\main-process\main.ts:722:7)
+    at Module._compile (node:internal/modules/cjs/loader:1271:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1326:10)
+    at Module.load (node:internal/modules/cjs/loader:1126:32)
+    at Module._load (node:internal/modules/cjs/loader:967:12)
+    at Function.c._load (node:electron/js2c/node_init:2:13672)
+error: [main] Error looking for toast activator CLSID in shortcut C:\Users\sfplinternet\Desktop\GitHub Desktop.lnk
+Error: Failed to read shortcut link
+    at ne (D:\Repo\Devices\WPL\webpack:\app\src\lib\find-toast-activator-clsid.ts:38:29)
+    at D:\Repo\Devices\WPL\webpack:\app\src\lib\find-toast-activator-clsid.ts:26:33
+    at D:\Repo\Devices\WPL\webpack:\app\src\main-process\notifications.ts:28:32
+    at D:\Repo\Devices\WPL\webpack:\app\src\main-process\main.ts:722:7
+    at Object.<anonymous> (D:\Repo\Devices\WPL\webpack:\app\src\main-process\main.ts:722:7)
+    at Module._compile (node:internal/modules/cjs/loader:1271:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1326:10)
+    at Module.load (node:internal/modules/cjs/loader:1126:32)
+    at Module._load (node:internal/modules/cjs/loader:967:12)
+    at Function.c._load (node:electron/js2c/node_init:2:13672)
+error: [main] Toast activator CLSID not found in any of the shortcuts. Falling back to known CLSIDs.
+error: [ui] Error checking for updates
+Error: The application is missing a dependency it needs to check and install updates. This is very, very bad.
+    at file:///C:/Users/sfplinternet/scoop/apps/github/3.3.18/resources/app/renderer.js:2:695434
+    at EventEmitter.onAutoUpdaterError (file:///C:/Users/sfplinternet/scoop/apps/github/3.3.18/resources/app/renderer.js:2:695850)
+    at EventEmitter.emit (node:events:517:28)
+    at Object.onMessage (node:electron/js2c/renderer_init:2:8536)
